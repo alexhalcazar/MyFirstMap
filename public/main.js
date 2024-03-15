@@ -109,13 +109,26 @@ var arr = [];
 
 map.on('load', 'building', function (e) {
     for(let i=0;i<e.features.length;i++){
-        if(e.features[i].id>=470741000 && e.features[i].id<=470754000){
-            //console.log("feature",e.features[i].geometry.coordinates);
-            //const coord = e.features[i].geometry;
-            const coord = e.features[i];
-            arr.push(coord);
+        let count=0;
+        for(let j=0;j<e.features[i].geometry.coordinates[0].length;j++){
+            const long=e.features[i].geometry.coordinates[0][j][0];
+            const lang=e.features[i].geometry.coordinates[0][j][1];
+            //console.log("feature",e.features[i].geometry.coordinates[0][j][1]);
+            if((long<= -118.14189816)&& (long>=-118.15192243)&&lang<= 34.07064465 && lang >=34.06296377){
+                count=count+1;
+            }
+            if(count==1){
+                const coord = e.features[i];
+                arr.push(coord);
+            }
+        }
+        // if(e.features[i].id>=470751567 && e.features[i].id<= 470751573){
+        //     //console.log("feature",e.features[i].geometry.coordinates[0]);
+        //     //const coord = e.features[i].geometry;
+        //     const coord = e.features[i];
+        //     arr.push(coord);
 
-        }  
+        // }  
     }
     
     localStorage.setItem('myStorage', JSON.stringify(arr));
@@ -265,10 +278,14 @@ class BoxCustomLayer {
 
 
             //coordinates of buildings
-            const coordx=845;
+            //845
+            //const coordx=845;
+            //const coordx=760;
 
-            const coordy= 628;
-            const coordz= -5.11;
+            const coordx=761;
+            const coordy= 691.5;
+
+            const coordz= -height;
             const extrudeSettings = { 
                 depth: height, 
                 bevelEnabled: false, 
@@ -279,16 +296,27 @@ class BoxCustomLayer {
             };
 
 
+            const ac=.9;
 
+            const bc=1.1;
+            
+            
             const shape2 = new THREE.Shape();
 
-            shape2.moveTo( mill*(a+arrayz[0][0]),mill*( b- arrayz[0][1]));
+            shape2.moveTo( mill*(a+arrayz[0][0])*ac,mill*( b- arrayz[0][1])*bc);
 
             for(let i=0;i<arrayz.length;i++){
-                shape2.lineTo(mill*(a+(arrayz[i][0])),mill*( b- arrayz[i][1]));
-                
+                shape2.lineTo(mill*(a+arrayz[i][0])*ac,mill*( b- arrayz[i][1])*bc);
+                console.log();
             }
+
             
+
+
+
+
+
+
 
             const geome2 = new THREE.ExtrudeGeometry( shape2, extrudeSettings );
         
@@ -404,7 +432,8 @@ map.on('style.load', () => {
             id: 'add-3d-buildings',
             source: 'composite',
             'source-layer': 'building',
-            filter: ['==', 'extrude', 'true'],
+            //change false to true
+            filter: ['==', 'extrude', 'false'],
             type: 'fill-extrusion',
             minzoom: 15,
             paint: {
