@@ -41,7 +41,7 @@ const linestring = {
 
 
 const navControl = new mapboxgl.NavigationControl({
-    showZoom: false
+    showZoom: true
 });
 
 map.addControl(navControl, 'top-right');

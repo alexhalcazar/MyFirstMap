@@ -8,17 +8,52 @@ html, body {
 #container {
     display: flex;
     height: 100%;
-    background-color: #f5f5f5; 
+    /* background-color: #f5f5f5;  */
+	background-color: #ffffff
 }
 
 #sidebar {
     width: 300px;
     flex-shrink: 0;
     height: 100%;
-    padding: 20px;
+    padding: 10px;
     background-color: #ffffff; 
     box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
     overflow-y: auto; 
+}
+
+.closebtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  margin: 0px 0px;
+   
+  /* position: absolute; */
+  /* top: 0; */
+  /* right: 25px; */
+  /* font-size: 36px; */
+  /* margin-left: 50px; */
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  margin: 0px 0px;
+  /* transition: background-color 0.3s; */
+  /* background-color: #3386c0; */
 }
 
 /*
@@ -36,13 +71,13 @@ button {
     background-color: #3386c0;
     color: #fff;
     border: none;
-    width: calc(100% - 40px); /* Full-width minus padding */
-    margin: 10px 0;
+    /* width: calc(100% - 40px); /* Full-width minus padding */ */
+    margin: 10px 10px;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    /* word-wrap: normal;  */
+    word-wrap: normal; 
 }
 
 button:hover {
@@ -60,12 +95,14 @@ button:hover {
 	grid-template-columns: 100px 100px 100px;
 }
 
+/* For the output boxes */
 #output, .elevation-info {
     background-color: #fff;
     border: 1px solid #ddd; 
     border-radius: 5px; 
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
+	margin-bottom: 10px;
     font-size: 16px;
     color: #333; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
@@ -79,7 +116,11 @@ button:hover {
 } */
 
 #map {
-    height: 100%;
+    height: auto;
     width: auto;
     flex-grow: 1; /* Ensure map takes remaining space */
+}
+
+.mapboxgl-ctrl-icon{
+	padding: 0px;
 }
