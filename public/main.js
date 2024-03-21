@@ -106,23 +106,50 @@ function convertLonLat(lon, lat) {
 
 //Range
 var arr = [];
+let arr2 = [];
+// global array of buildings
+
+let buildings=0;
+let pley;
+
+
+
 
 map.on('load', 'building', function (e) {
+    buildings = map.queryRenderedFeatures({ layers: ['building']});
+    //console.log(buildings);
     for(let i=0;i<e.features.length;i++){
         let count=0;
         for(let j=0;j<e.features[i].geometry.coordinates[0].length;j++){
-            const long=e.features[i].geometry.coordinates[0][j][0];
-            const lang=e.features[i].geometry.coordinates[0][j][1];
-            //console.log("feature",e.features[i].geometry.coordinates[0][j][1]);
-            if((long<= -118.14189816)&& (long>=-118.15192243)&&lang<= 34.07064465 && lang >=34.06296377){
+            const long=e.features[i]._geometry.coordinates[0][j][0];
+            const lang=e.features[i]._geometry.coordinates[0][j][1];
+            //console.log("feature",e.features[i].properties.height);
+            //f((long<= -118.13060630)&& (long>=-118.18192443)&&lang<= 34.09994465 && lang >=34.00885380){
+            
+            if((long<= -118.13060630)&& (long>=-118.18192443)&&lang<= 34.09994465 && lang >=34.00885380){
+                //console.log(long);
+                //console.log(lang);
                 count=count+1;
             }
             if(count==1){
                 const coord = e.features[i];
+                // create a new building array
+                // buildingArray = [];
+                // another for loop to go through current building features arrays
+                // grab each long and lat coord
+                // [long, lat]
+                // push that into buildingArray
+
+                // Once for loop ends push buildingArray to global array of buildings
+                let coord2 = e.features[i];
+                //console.log('coord 2', coord2);
                 arr.push(coord);
+                
+                arr2.push(coord2);
             }
         }
-        // if(e.features[i].id>=470751567 && e.features[i].id<= 470751573){
+        // if(e.features[i].id==470752311 ){
+        //     console.log('yes');
         //     //console.log("feature",e.features[i].geometry.coordinates[0]);
         //     //const coord = e.features[i].geometry;
         //     const coord = e.features[i];
@@ -131,11 +158,25 @@ map.on('load', 'building', function (e) {
         // }  
     }
     
+    pley=JSON.stringify(arr);
     localStorage.setItem('myStorage', JSON.stringify(arr));
     var obj = JSON.parse(localStorage.getItem('myStorage'));
+    return arr2;
     
 });
 var obj = JSON.parse(localStorage.getItem('myStorage'));
+
+
+console.log('First array', arr2);
+
+
+
+//console.log(buildings);
+let temp=JSON.stringify(arr);
+console.log(arr[0]);
+// console.log('first object', arr[0]['type']);
+
+
 
 class BoxCustomLayer {
     type = 'custom';
@@ -278,14 +319,37 @@ class BoxCustomLayer {
 
 
             //coordinates of buildings
-            //845
-            //const coordx=845;
-            //const coordx=760;
+            
 
-            const coordx=761;
-            const coordy= 691.5;
+            // const coordx=778;
+
+            // const coordy= 691.5;
+
+            // const coordz= -height;
+
+            // //scaler \
+            // //.915-93
+            // const ac=.92;
+
+            // const bc=1.1;
+
+
+
+
+            const coordx=780;
+
+            const coordy= 700.7;
 
             const coordz= -height;
+
+            //scaler \
+            //.915-.923
+            const ac=.923;
+
+            //1.1-1.12
+            const bc=1.115;
+
+
             const extrudeSettings = { 
                 depth: height, 
                 bevelEnabled: false, 
@@ -295,10 +359,7 @@ class BoxCustomLayer {
                 bevelThickness: 1 
             };
 
-
-            const ac=.9;
-
-            const bc=1.1;
+            
             
             
             const shape2 = new THREE.Shape();
@@ -307,7 +368,8 @@ class BoxCustomLayer {
 
             for(let i=0;i<arrayz.length;i++){
                 shape2.lineTo(mill*(a+arrayz[i][0])*ac,mill*( b- arrayz[i][1])*bc);
-                console.log();
+                //console.log("long",mill*(a+arrayz[i][0]));
+                //console.log("lat",mill*( b- arrayz[i][1]));
             }
 
             
@@ -527,17 +589,17 @@ map.on('style.load', () => {
     map.setFilter('building', ['has', 'height']);
 
     // Access and log building data (example)
-    map.on('click', 'building', function (e) {
-        console.log("Building Properties:", e.features[0].properties);
-        console.log('Building Geometry:', e.features[0].geometry);
-        console.log("ID:", e.features[0].id);
-        if (e.features.length > 0) {
-            const feature = e.features[0];
-            addBuildingToThreeJS(feature);
-            console.log(feature);
-            //console.log('clicked');
-        }
-    });
+    // map.on('click', 'building', function (e) {
+    //     console.log("Building Properties:", e.features[0].properties);
+    //     console.log('Building Geometry:', e.features[0].geometry);
+    //     console.log("ID:", e.features[0].id);
+    //     if (e.features.length > 0) {
+    //         const feature = e.features[0];
+    //         addBuildingToThreeJS(feature);
+    //         console.log(feature);
+    //         //console.log('clicked');
+    //     }
+    // });
     
     
 
