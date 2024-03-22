@@ -65,21 +65,6 @@
     width: 90%;
 }
 
-
-button {
-    font: bold 14px 'Roboto', sans-serif;
-    background-color: #3386c0;
-    color: #fff;
-    border: none;
-    /* width: calc(100% - 40px); /* Full-width minus padding
-    margin: 10px 10px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    word-wrap: normal; 
-}
-
 button:hover {
     background-color: #4ea0da;
 }
@@ -147,31 +132,66 @@ html, body, #map{
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #fff;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
-.sidebar a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+/* .sidebar a { */
+  /* padding: 8px 8px 8px 32px; */
+  /* text-decoration: none; */
+  /* font-size: 25px; */
+  /* color: #818181; */
+  /* display: block; */
+  /* transition: 0.3s; */
+/* } */
+
+/* .sidebar a:hover { */
+  /* color: #f1f1f1; */
+/* } */
+
+/* .sidebar .closebtn { */
+  /* position: absolute; */
+  /* top: 0; */
+  /* right: 25px; */
+  /* font-size: 36px; */
+  /* margin-left: 50px; */
+/* } */
+
+/* #sidebar { */
+    /* width: 300px; */
+    /* flex-shrink: 0; */
+    /* height: 100%; */
+    /* padding: 10px; */
+    /* background-color: #ffffff;  */
+    /* box-shadow: 2px 0 5px rgba(0,0,0,0.1);  */
+    /* overflow-y: auto;  */
+/* } */
+
+button {
+    font: bold 14px 'Roboto', sans-serif;
+    background-color: #3386c0;
+    color: #fff;
+    border: none;
+    /* width: calc(100% - 40px); /* Full-width minus padding */ */
+    margin: 10px 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    word-wrap: normal; 
 }
 
-.sidebar a:hover {
-  color: #f1f1f1;
+.ui-block-a{
+	margin: 5px;
 }
 
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
+.ui-grid-b{
+    display: grid;
+	grid-template-rows: 100px 100px;
+	grid-template-columns: 100px 100px 100px;
 }
 
 .openbtn {
@@ -190,6 +210,53 @@ html, body, #map{
 
 .openbtn:hover {
   background-color: #444;
+  transition: background-color 0.3s;
+}
+
+.closebtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  margin-right: 10px;
+  float: right;
+   
+  /* position: absolute;  */
+  /* top: 0;  */
+  /* right: 25px;  */
+  /* font-size: 36px; */
+  /* margin-left: 50px; */
+}
+
+.elevation-info {
+    background-color: #fff;
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    padding: 10px;
+    margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+    font-size: 16px;
+    color: #333; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+}
+
+#output {
+    background-color: #fff;
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    padding: 10px;
+    margin-top: 52px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+    font-size: 16px;
+    color: #333; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 }
 
 #main {
@@ -205,3 +272,7 @@ html, body, #map{
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }   
+
+.mapboxgl-ctrl-icon{
+	padding: 0px;
+}
