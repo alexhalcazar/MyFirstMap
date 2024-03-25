@@ -55,7 +55,6 @@ let lat;
 let lng;
 let popup;
 let startPoint;
-const altitudeArr = [];
 const droneCoordPath =[];
 
 function addBuildingToThreeJS(feature) {
@@ -469,11 +468,11 @@ map.on('style.load', () => {
         onAdd: function () {
             // Creative Commons License attribution:  Metlife Building model by https://sketchfab.com/NanoRay
             // https://sketchfab.com/3d-models/metlife-building-32d3a4a1810a4d64abb9547bb661f7f3
-            const scale = 3.2;
+            const scale = 30;
             const options = {
                 obj: '../drone/scene.gltf',
                 type: 'gltf',
-                scale: { x: scale, y: scale, z: 2.7 },
+                scale: { x: scale, y: scale, z: 25 },
                 units: 'meters',
                 rotation: { x: 90, y: -90, z: 0 }
             };
@@ -582,9 +581,9 @@ map.on('style.load', () => {
                 };
 
                 geojson.features.push(point);
+
+                // Array storing each points coordinates
                 droneCoordPath.push(point.geometry.coordinates);
-                console.log(droneCoordPath);
-                console.log(" ");
                 startPoint = [point.geometry.coordinates[0],point.geometry.coordinates[1]];
             }
 
@@ -601,8 +600,6 @@ map.on('style.load', () => {
                 value.textContent = `Total distance: ${distance.toLocaleString()}km`;
                 distanceContainer.appendChild(value);
             }
-
-            droneCoordPath
 
             map.getSource('geojson').setData(geojson);
 
@@ -631,22 +628,24 @@ map.on('style.load', () => {
                     `)
 					.addTo(map);
 
-            // Following code gets user altitude input and adds it to the route
+            //----- Following code gets user altitude input and adds it to the route ------//
 
             let userAltitude;
 
             // Gets user input for altitude and stores it in an array
             document.querySelector("#btn-altitude").addEventListener("click", () => {
                 userAltitude = document.querySelector("#altitude").value;
-                console.log(userAltitude);
-                // altitudeArr.push(userAltitude);
-                addAltitude(altitudeArr);
-            })
+                addAltitude(userAltitude);
+            });
+            
 
             function addAltitude (input) {
-                geojson.features.forEach(coord => {
-                })
+                droneCoordPath[droneCoordPath.length-1].push(input);
             }
+
+            console.log(droneCoordPath);
+            // ----------------------------------------------------------------------------//
+
 
             // If a point is removed, remove the popup as well
             if (features.length) {
@@ -660,8 +659,11 @@ map.on('style.load', () => {
             let outputDiv = document.getElementById('output');
             outputDiv.innerHTML = 'None';
         }
+
+        
     });
 });
+
 map.on('mousemove', (e) => {
     boxLayer.raycast(e.point, false);
 });
@@ -745,7 +747,7 @@ document.querySelector('#btn-ruler-off').addEventListener('click', () => {
 document.querySelector('#btn-move-drone').addEventListener('click', () => {
     // Data for the path that the drone will follow as well as the duration of the animation
     const options = {
-        path: linestring.geometry.coordinates,
+        path: droneCoordPath,
         duration: 10000
     }
 
