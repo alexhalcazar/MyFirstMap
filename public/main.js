@@ -53,7 +53,10 @@ let droneX = -118.148512;
 let droneY = 34.065868;
 let lat;
 let lng;
-let numOfPoints;
+let popup;
+let startPoint;
+const altitudeArr = [];
+const droneCoordPath =[];
 
 function addBuildingToThreeJS(feature) {
     // Extracting geometry and properties
@@ -546,6 +549,7 @@ map.on('style.load', () => {
     });
 
 
+    // Adds points to the map for the drone route when a user clicks 
     map.on('click', (e) => {
         if (ruler) {
             const features = map.queryRenderedFeatures(e.point, {
@@ -578,6 +582,10 @@ map.on('style.load', () => {
                 };
 
                 geojson.features.push(point);
+                droneCoordPath.push(point.geometry.coordinates);
+                console.log(droneCoordPath);
+                console.log(" ");
+                startPoint = [point.geometry.coordinates[0],point.geometry.coordinates[1]];
             }
 
             if (geojson.features.length > 1) {
@@ -594,7 +602,60 @@ map.on('style.load', () => {
                 distanceContainer.appendChild(value);
             }
 
+            droneCoordPath
+
             map.getSource('geojson').setData(geojson);
+
+            // Provides the coordinates of each point for the popup to input altitude
+            function popupAltitude (point) {
+                if (linestring.geometry.coordinates.length < 1) {
+                    return startPoint;
+                }
+                else {
+                    return linestring.geometry.coordinates[linestring.geometry.coordinates.length-1];
+                }
+            }
+
+            // function userAltitude() {
+            //     let alt = prompt("Enter point's altitude");
+            //     return alt;
+            // }
+
+            // Popup on each point that prompts user to each point altitude
+            popup = new mapboxgl.Popup({ offset: 0 })
+					.setLngLat(popupAltitude(linestring.geometry.coordinates))
+					.setHTML(`
+                    <h2>Enter point's altitude</h2>
+                    <input id="altitude" style="width:100px"> 
+                    <button id="btn-altitude" style="width:70px">Enter</button>
+                    `)
+					.addTo(map);
+
+            // Following code gets user altitude input and adds it to the route
+
+            let userAltitude;
+
+            // Gets user input for altitude and stores it in an array
+            document.querySelector("#btn-altitude").addEventListener("click", () => {
+                userAltitude = document.querySelector("#altitude").value;
+                console.log(userAltitude);
+                // altitudeArr.push(userAltitude);
+                addAltitude(altitudeArr);
+            })
+
+            function addAltitude (input) {
+                geojson.features.forEach(coord => {
+                })
+            }
+
+            // If a point is removed, remove the popup as well
+            if (features.length) {
+                const id = popup;
+                geojson.features = geojson.features.filter(
+                    (point) => point.properties.id !== id
+                );
+            }
+
         } else {
             let outputDiv = document.getElementById('output');
             outputDiv.innerHTML = 'None';
@@ -609,9 +670,9 @@ map.on('click', (e) => {
     boxLayer.raycast(e.point, true);
 });
 
-map.on('load', function() {
-    addRadarLayerToMapbox(map);
-});
+// map.on('load', function() {
+//     addRadarLayerToMapbox(map);
+// });
 
 const lngDisplay = document.getElementById('lng');
 const latDisplay = document.getElementById('lat');
