@@ -123,6 +123,10 @@ body { margin:0; padding:0; }
 html, body, #map{
     height:100%;
     margin: 0px;
+<<<<<<< Updated upstream
+=======
+	background-color: #000;
+>>>>>>> Stashed changes
 }
 
 .sidebar {
@@ -137,6 +141,10 @@ html, body, #map{
   transition: 0.5s;
   margin-top: 10px;
   margin-left: 10px;
+<<<<<<< Updated upstream
+=======
+  background-color: #000;
+>>>>>>> Stashed changes
 }
 
 /* .sidebar a { */
@@ -174,7 +182,10 @@ button {
     font: bold 14px 'Roboto', sans-serif;
     background-color: #3386c0;
     color: #fff;
+<<<<<<< Updated upstream
     border: none;
+=======
+>>>>>>> Stashed changes
     /* width: calc(100% - 40px); /* Full-width minus padding */ */
     margin: 10px 10px;
     padding: 10px 20px;
@@ -222,6 +233,7 @@ button {
   border-radius: 5px;
   text-align: center;
   text-decoration: none;
+<<<<<<< Updated upstream
   border: none;
   margin-right: 10px;
   float: right;
@@ -231,6 +243,21 @@ button {
   /* right: 25px;  */
   /* font-size: 36px; */
   /* margin-left: 50px; */
+=======
+  margin-right: 10px;
+  float: right;
+  border-color: #FFF;
+}
+
+.closebtn:hover {
+	background-color: #444;
+	transition: background-color 0.3s;
+}
+
+.ui-block-a-btn{
+	width: 100%;
+	height: 60%;
+>>>>>>> Stashed changes
 }
 
 .elevation-info {
@@ -244,6 +271,10 @@ button {
     font-size: 16px;
     color: #333; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+<<<<<<< Updated upstream
+=======
+	font: bold 14px 'Roboto', sans-serif;
+>>>>>>> Stashed changes
 }
 
 #output {
@@ -257,6 +288,10 @@ button {
     font-size: 16px;
     color: #333; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+<<<<<<< Updated upstream
+=======
+	font: bold 14px 'Roboto', sans-serif;
+>>>>>>> Stashed changes
 }
 
 #main {
