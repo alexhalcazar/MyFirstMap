@@ -55,7 +55,7 @@ let lat;
 let lng;
 let popup;
 let startPoint;
-const droneCoordPath =[];
+const droneCoordPath = [];
 
 function addBuildingToThreeJS(feature) {
     // Extracting geometry and properties
@@ -308,7 +308,7 @@ class BoxCustomLayer {
         //call makershape function to generate the buildings
         for(let j=0;j<obj.length;j++){
             
-            makerShape(obj[j].geometry.coordinates[0],obj[j].properties.height);
+            // makerShape(obj[j].geometry.coordinates[0],obj[j].properties.height);
         }
         scene.add(group);
 
@@ -584,6 +584,8 @@ map.on('style.load', () => {
 
                 // Array storing each points coordinates
                 droneCoordPath.push(point.geometry.coordinates);
+
+                // Starting point for the popups 
                 startPoint = [point.geometry.coordinates[0],point.geometry.coordinates[1]];
             }
 
@@ -613,11 +615,6 @@ map.on('style.load', () => {
                 }
             }
 
-            // function userAltitude() {
-            //     let alt = prompt("Enter point's altitude");
-            //     return alt;
-            // }
-
             // Popup on each point that prompts user to each point altitude
             popup = new mapboxgl.Popup({ offset: 0 })
 					.setLngLat(popupAltitude(linestring.geometry.coordinates))
@@ -628,24 +625,43 @@ map.on('style.load', () => {
                     `)
 					.addTo(map);
 
-            //----- Following code gets user altitude input and adds it to the route ------//
-
-            let userAltitude;
 
             // Gets user input for altitude and stores it in an array
+            let userAltitude;
             document.querySelector("#btn-altitude").addEventListener("click", () => {
                 userAltitude = document.querySelector("#altitude").value;
                 addAltitude(userAltitude);
             });
             
 
+            // Adds altitude values to each point's coordinates and draws elevated line
+            // Also draws line connecting ground and air paths at each point
             function addAltitude (input) {
                 droneCoordPath[droneCoordPath.length-1].push(input);
+
+                let line;
+                line = tb.line({
+                    geometry: droneCoordPath,
+                    width: 5,
+                    color: 'gold'
+                })
+                tb.add(line);
+
+                const slicedArray = droneCoordPath => droneCoordPath.slice(0,2),
+                groundPath = droneCoordPath.map(slicedArray);
+                let lineGeo;
+                let line2;
+                for (let i = 0; i < groundPath.length; i++) {
+                    lineGeo = [[groundPath[i]], [droneCoordPath[i]]];
+                    line2 = tb.line({
+                        geometry: [lineGeo[0][0], lineGeo[1][0]],
+                        width: 5,
+                        color: 'steelblue'
+                    })
+                    tb.add(line2);
+                }
+             
             }
-
-            console.log(droneCoordPath);
-            // ----------------------------------------------------------------------------//
-
 
             // If a point is removed, remove the popup as well
             if (features.length) {
@@ -753,10 +769,7 @@ document.querySelector('#btn-move-drone').addEventListener('click', () => {
 
     // start the drone animation with above options, and remove the line when animation ends
     drone.followPath(
-        options,
-        function() {
-            tb.remove(line);
-        }
+        options
     );
 });
 
