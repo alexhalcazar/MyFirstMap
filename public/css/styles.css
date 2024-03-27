@@ -62,7 +62,7 @@
 }
 
 .main_content_small{
-    width: 90%;
+width: 90%;
 }
 
 button:hover {
@@ -123,10 +123,7 @@ body { margin:0; padding:0; }
 html, body, #map{
     height:100%;
     margin: 0px;
-<<<<<<< Updated upstream
-=======
 	background-color: #000;
->>>>>>> Stashed changes
 }
 
 .sidebar {
@@ -141,10 +138,7 @@ html, body, #map{
   transition: 0.5s;
   margin-top: 10px;
   margin-left: 10px;
-<<<<<<< Updated upstream
-=======
   background-color: #000;
->>>>>>> Stashed changes
 }
 
 /* .sidebar a { */
@@ -182,12 +176,8 @@ button {
     font: bold 14px 'Roboto', sans-serif;
     background-color: #3386c0;
     color: #fff;
-<<<<<<< Updated upstream
-    border: none;
-=======
->>>>>>> Stashed changes
-    /* width: calc(100% - 40px); /* Full-width minus padding */ */
-    margin: 10px 10px;
+    /* width: calc(100% - 40px); /* Full-width minus padding */ 
+    /* margin: 10px 10px; */
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -233,17 +223,6 @@ button {
   border-radius: 5px;
   text-align: center;
   text-decoration: none;
-<<<<<<< Updated upstream
-  border: none;
-  margin-right: 10px;
-  float: right;
-   
-  /* position: absolute;  */
-  /* top: 0;  */
-  /* right: 25px;  */
-  /* font-size: 36px; */
-  /* margin-left: 50px; */
-=======
   margin-right: 10px;
   float: right;
   border-color: #FFF;
@@ -257,7 +236,8 @@ button {
 .ui-block-a-btn{
 	width: 100%;
 	height: 60%;
->>>>>>> Stashed changes
+	background-color: #000;
+	border-color: #fff
 }
 
 .elevation-info {
@@ -271,11 +251,16 @@ button {
     font-size: 16px;
     color: #333; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-<<<<<<< Updated upstream
-=======
 	font: bold 14px 'Roboto', sans-serif;
->>>>>>> Stashed changes
 }
+
+.distance-container  {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	font: bold 14px 'Roboto', sans-serif;
+} 
 
 #output {
     background-color: #fff;
@@ -288,10 +273,7 @@ button {
     font-size: 16px;
     color: #333; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-<<<<<<< Updated upstream
-=======
 	font: bold 14px 'Roboto', sans-serif;
->>>>>>> Stashed changes
 }
 
 #main {
